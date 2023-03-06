@@ -1,0 +1,31 @@
+{% include "header.html" %}
+<section class="error" id="error">
+    <div class="home-text" style="width: 100%; height:100%; margin-top:10%;">
+   
+      {% with messages = get_flashed_messages() %}  
+      {% if messages %}  
+            {% for message in messages %}  
+                 <h2 style="color: #eb4a4a;">{{ message }}</h2>  
+            {% endfor %}  
+      {% endif %}  
+   {% endwith %}  
+        <div class="contact-form">
+            <form action="{{ url_for('login') }}" method="post">
+              {{ form.csrf_token }}
+             <h2> {{ form.email.label }}</h2>    
+              {{ form.email }}
+              <h2>   {{ form.password.label }}</h2>
+              {{ form.password }}
+              {{ form.submit(class_="send")}}
+            </form>
+          </div>
+     
+      <div class="backhome">
+      <h2 style="font-size: 3rem; letter-spacing:7px;">
+       <a href="{{ url_for('index') }}" id="backhome">Back Home !</a> 
+      </h2>
+    </div>
+    </div>
+  </section>
+</body>
+  </html>

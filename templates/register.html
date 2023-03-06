@@ -1,0 +1,83 @@
+{% include "header.html" %}
+<script>
+  function outputUpdate(price) {
+      document.querySelector('#selected-price').value = price;
+  }
+  </script>
+<section class="home" id="home" style="background-image: url(../static/img/project.jpg);">
+    <div class="home-text">
+      {% if not is_edit %}
+      <h1>
+        Register
+      </h1>
+      <h2>
+        Show Your Brave..
+      </h2>
+      {% else %}
+      <h1>
+        Edit 
+      </h1>
+      {% endif %}
+    </div>
+  </section>
+  {% if not is_edit %}
+  <section class="proje">
+    <div class="contact-form">
+      <form action="" method="post">
+        {{ form.csrf_token }}
+        {{ form.name.label(class_="label") }}
+        {{ form.name(required='required') }}
+        {{ form.email.label(class_="label") }}
+        {{ form.email(required='required') }}
+        {{ form.password.label(class_="label") }}
+        {{ form.password(required='required') }}
+        {{ form.smoked_cigarettes_per_day.label(class_="label") }}
+        {{ form.smoked_cigarettes_per_day(required='required') }}
+        {{ form.cigarettes_in_pack.label(class_="label") }}
+        {{ form.cigarettes_in_pack(required='required') }}
+        {{ form.years_of_smoking.label(class_="label") }}
+        {{ form.years_of_smoking(required='required') }}
+        {{ form.date.label(class_="label") }}
+        {{ form.date(required='required') }}
+        {{ form.time.label(class_="label") }}
+        {{ form.time(required='required') }}
+        
+       {{ form.price.label }}:
+       {{ form.price(min=0, max=100, oninput="outputUpdate(value)") }}
+         <output for="price" id="selected-price"> {{ form.price.data }} </output> <br>
+        {{ form.currency.label(class_="label") }} &nbsp;
+        {{ form.currency(required='required', class_="currency") }}  <br> <br> <br> <br>
+        {{ form.submit(class_="send")}}
+      </form>
+    </div>
+  </section>
+  {% else %}
+  <section class="proje">
+    <div class="contact-form">
+      
+      <form action="" method="post">
+        {{ form.csrf_token }}
+        {{ form.smoked_cigarettes_per_day.label(class_="label") }}
+        {{ form.smoked_cigarettes_per_day(required='required') }}
+        {{ form.cigarettes_in_pack.label(class_="label") }}
+        {{ form.cigarettes_in_pack(required='required') }}
+        {{ form.years_of_smoking.label(class_="label") }}
+        {{ form.years_of_smoking(required='required') }}
+        <input type="text" name="date" value="{{ date }}">
+        <input type="text" name="time" value="{{ time }}">
+       {{ form.price.label }}:
+       {{ form.price(min=0, max=100, oninput="outputUpdate(value)") }}
+         <output for="price" id="selected-price"> {{ form.price.data }} </output> <br>
+        {{ form.currency.label(class_="label") }} &nbsp;
+        {{ form.currency(required='required', class_="currency") }}  <br> <br> <br> <br>
+        {{ form.submit(class_="send")}}
+
+      </form>
+    
+    </div>
+  </section>
+  {% endif %}
+  
+ 
+
+{% include "footer.html" %}

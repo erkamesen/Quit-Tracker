@@ -1,0 +1,173 @@
+{% include "header.html" %}
+  <!---home--->
+  <Section class="home" id="home">
+    <div class="home-text">
+      
+      <h1>
+        <br><br><br><span>Quit </span>
+        <span>Tracker</span>
+      </h1>
+      <h3 id="alan">Stop making excuses &<br> Start making changes</h3>
+      {% if not current_user.is_authenticated %}
+      <a href="{{ url_for('login')}}"><button class="btn">Login</button></a>
+      <a href="{{ url_for('register')}}"><button class="btn">Register</button></a>
+      {% else %}
+      <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a>
+      <a href="{{ url_for('edit', id=current_user.get_id() ) }}"> <button class="btn"> Edit - <i class="fa fa-refresh" aria-hidden="true"></i> </span></button> </a>
+      {% endif %}
+    </div>
+    </div>
+  </section>
+
+{% if tracker %}
+<!---stats--->
+  <section class="stats" id="stats">
+    <div class="main-text">
+      <h2>Stats</h2>
+      <h4>Dont be a slave !</h4>
+    </div>
+
+    <div class="stats-content">
+      <div>
+        <p class="Project_Analytics_Heading text-center">
+         <h1> <span class="secondary">-</span> Day {{ tracker.smoke_free()[0] }} <span class="secondary">-</span></h1>
+        </p>
+        <svg viewBox="0 0 36 36" class="circular-chart">
+
+            <path class="that-circle" stroke="#ffba00" stroke-dasharray="100 50" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+
+            <path class="that-circle" stroke="#ff4858" stroke-dasharray="50 75" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+
+            <path class="that-circle" stroke="#845cee" stroke-dasharray="25 100" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+
+            <text x="18" y="20.35" class="percentage">{{ tracker.percentage()[0] }}%</text>
+            <text x="13" y="25" class="percentage_done">{{ tracker.percentage()[1] }}</text>
+          
+        </svg>
+     
+        <div class="quote">
+       <span>❝</span> <p>{{ quote }}</p><span>❞</span>
+      </div>
+  
+      <table class="table1">
+        <tr><td style="color:#808080;">Smoked Cigarettes - <i class="fa-solid fa-skull-crossbones"></i></td>
+          <td style="color:#ff4858">{{ tracker.smoked_cigarettes() }}</td>
+        </tr>
+        <tr><td style="color:#808080;">Money Wasted - <i class="fa-solid fa-trash"></i></td>
+          <td style="color:#ff4858">{{ tracker.currency }} {{ tracker.money_wasted() }}</td>
+        </tr>
+        <tr><td style="color:#808080;">Life Lost - <i class="fa-solid fa-exclamation"></i></td>
+          <td style="color:#ff4858">{{ tracker.life_lost()[0] }}d {{ tracker.life_lost()[1] }}h
+            {{ tracker.life_lost()[2] }}m </td>
+        </tr>
+      </table>
+  
+     
+    </div>
+
+          
+     
+     
+      <div class="box">
+        <h1>Your Stats</h1>
+        <table class="table1">
+          <tr>
+            <td>
+              <i class="fa-regular fa-clock"></i> <br>
+              <p>Life Regained</p>
+              <p id="i1">{{ tracker.life_regained()[0] }}d {{ tracker.life_regained()[1] }}h
+                 {{ tracker.life_regained()[2] }}m {{ tracker.life_regained()[3] }}s</p>
+            </td>
+            <td>
+              <i class="fa-solid fa-money-bills"></i> <br>
+              <p>Money Saved</p>
+              <p id="i2">{{ tracker.currency }} {{ tracker.money_saved() }}</p>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <i class="fa-regular fa-flag"></i> <br>
+              <p>Smoke Free</p>
+              <p id="i3">{{ tracker.smoke_free()[0] }}d {{ tracker.smoke_free()[1] }}h
+                {{ tracker.smoke_free()[2] }}m {{ tracker.smoke_free()[3] }}s</p>
+            </td>
+            <td>
+              <i class="fa-solid fa-ban-smoking"></i> <br>
+              <p>Not Smoked</p>
+              <p id="i4">{{ tracker.cigarettes_not_smoked() }}</p>
+            </td>
+          </tr>
+
+          
+        </table>
+        
+    </div>
+    
+  </section>
+  <section class="stats"> 
+    <h1>Money & Life Expectancy</h1>  
+    <table class="table1">
+      <tr>
+        <td>1 Week</td>
+        <td style="color:#ff4858">{{ tracker.currency }} {{ tracker.money_expectancy(7)}} </td>
+        <td style="color:#845cee">{{ tracker.life_expectancy(7)[0]}}d {{ tracker.life_expectancy(7)[1]}}h {{ tracker.life_expectancy(7)[2]}}m</td>
+      </tr>
+      <tr>
+        <td>1 Month</td>
+        <td style="color:#ff4858">{{ tracker.currency }} {{ tracker.money_expectancy(30)}}</td>
+        <td style="color:#845cee">{{ tracker.life_expectancy(30)[0]}}d {{ tracker.life_expectancy(30)[1]}}h {{ tracker.life_expectancy(30)[2]}}m</td>
+      </tr>
+      <tr>
+        <td>1 Year</td>
+        <td style="color:#ff4858">{{ tracker.currency }} {{ tracker.money_expectancy(365)}}</td>
+        <td style="color:#845cee">{{ tracker.life_expectancy(365)[0]}}d {{ tracker.life_expectancy(365)[1]}}h {{ tracker.life_expectancy(365)[2]}}m</td>
+      </tr>
+      <tr>
+        <td>5 Years</td>
+        <td style="color:#ff4858">{{ tracker.currency }} {{ tracker.money_expectancy(365*5)}}</td>
+        <td style="color:#845cee">{{ tracker.life_expectancy(365*5)[0]}}d {{ tracker.life_expectancy(365*5)[1]}}h {{ tracker.life_expectancy(365*5)[2]}}m</td>
+      </tr>
+      <tr>
+        <td>10 Years</td>
+        <td style="color:#ff4858">{{ tracker.currency }} {{ tracker.money_expectancy(365*10)}}</td>
+        <td style="color:#845cee">{{ tracker.life_expectancy(365*10)[0]}}d {{ tracker.life_expectancy(365*10)[1]}}h {{ tracker.life_expectancy(365*10)[2]}}m</td>
+      </tr>
+     
+    </table>
+    
+  </section>
+  
+
+{% endif %}
+<section class="contact" id="contact">
+  <div class="contact-text">
+    <h2>Contact</h2>
+    <h4 style="color:#ffba00;">Strength comes from unity</h4>
+    <p>
+      You can contact me for cooperation or questions.
+    </p>
+
+  </div>
+
+  <!-- FORM -->
+  <div class="contact-form">
+    <form action="" method="post">
+      {{ form.csrf_token }}
+      {{ form.name }}
+      {{ form.email }}
+      {{ form.subject }}
+      {{ form.text }}
+      {{ form.submit(class_="send")}}
+    </form>
+  </div>
+</section>
+  
+{% include "footer.html" %}
+
+
