@@ -64,7 +64,7 @@ flask run
 
 Portfolio project should now be running on your local machine at http://localhost:5000
 
-- Register and use your Quit Tracker 👍👍👍
+- Register and you ready to use your own Quit Tracker 👍👍👍
 
 ## Snaps
 
