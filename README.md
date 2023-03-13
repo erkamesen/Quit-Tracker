@@ -1,5 +1,5 @@
 # Quit-Tracker
-Quit Tracker app with made it Flask MicroFramework
+Quit Tracker app made with Flask MicroFramework
 
 ## Content
 - [Features](https://github.com/erkamesen/Quit-Tracker/blob/master/README.md#features)
